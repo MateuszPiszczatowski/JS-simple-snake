@@ -5,11 +5,17 @@
     <meta charset="UTF-8" />
     <!-- http://proger.i-forge.net/The_smallest_transparent_pixel/ -->
     <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.min.css" />
   </head>
   <body>
     <header class="header"></header>
-    <main class="main main--grid"></main>
+    <main class="main">
+      <div class="main__grid">
+        <div class="snake-head" id="snake-head" style="grid-row: 9/10; grid-column: 10/11"></div>
+        <div class="snake-body" style="grid-row: 10/11; grid-column: 10/11"></div>
+        <div class="snake-tail" id="snake-tail" style="grid-row: 11/12; grid-column: 10/11"></div>
+      </div>
+    </main>
     <footer class="footer"></footer>
     <script src="game.js"></script>
   </body>
