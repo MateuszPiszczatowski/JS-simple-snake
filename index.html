@@ -8,13 +8,11 @@
     <link rel="stylesheet" href="css/style.min.css" />
   </head>
   <body>
-    <header class="header"></header>
+    <header class="header">
+      <button class="play-button">Play game</button>
+    </header>
     <main class="main">
-      <div class="main__grid">
-        <div class="snake-head" id="snake-head" style="grid-row: 9/10; grid-column: 10/11"></div>
-        <div class="snake-body" style="grid-row: 10/11; grid-column: 10/11"></div>
-        <div class="snake-tail" id="snake-tail" style="grid-row: 11/12; grid-column: 10/11"></div>
-      </div>
+      <div class="main__grid" style="display: none"></div>
     </main>
     <footer class="footer"></footer>
     <script src="game.js"></script>
