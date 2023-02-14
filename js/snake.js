@@ -62,7 +62,6 @@ const moveSnakePart = (part, direction) => {
 
 const moveSnake = (snake, grid, enlongate = false) => {
   let oldDirection = moveSnakePart(snake.head, snake.head.dataset.direction);
-  console.log(snake.head.dataset.direction); //check
   const lastBodyPartCoords = getGridCoords(snake.body[snake.body.length - 1]);
   snake.body.forEach((bodyPart) => {
     oldDirection = moveSnakePart(bodyPart, oldDirection);
