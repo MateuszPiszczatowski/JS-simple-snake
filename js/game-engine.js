@@ -4,20 +4,16 @@ import { prepareGameBoard } from "./gameboard.js";
 
 const KEY_CONF = {
   w: "up",
-  W: "up",
   s: "down",
-  S: "down",
   a: "left",
-  A: "left",
   d: "right",
-  D: "right",
 };
 
 const gameEngine = (grid, snake) => {
   const keyPressedEvent = (event) => {
-    const pressedKey = event.key;
+    const pressedKey = event.key.toLowerCase();
     if (Object.hasOwn(KEY_CONF, pressedKey)) {
-      snake.head.dataset.direction = KEY_CONF[event.key];
+      snake.head.dataset.direction = KEY_CONF[pressedKey];
     }
   };
   const body = document.querySelector("body");
@@ -41,7 +37,7 @@ const initGame = () => {
   }, 3000);
 };
 
-const getScore = () =>{
+const getScore = () => {
   return FOOD_COUNTER * 10;
 };
 
