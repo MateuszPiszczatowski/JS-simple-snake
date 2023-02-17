@@ -17,4 +17,8 @@ const initGame = () => {
   gameEngine(grid, snake);
 };
 
-export { initGame };
+const getScore = () =>{
+  return FOOD_COUNTER * 10;
+};
+
+export { initGame, getScore };
