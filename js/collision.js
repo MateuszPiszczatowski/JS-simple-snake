@@ -32,7 +32,7 @@ function checkIfWallCollision(snake, grid){
         || snakeHeadCoords[1] >= height || snakeHeadCoords[1] <= height;
 };
 
-function handleWallCollision(){
+function handleWallAndSnakeCollision(){
     const score = getScore();
     if (confirm("Game over, you looooooser!")) {
         alert("You've scored: " + score + ". Do better this time.")
@@ -47,5 +47,6 @@ function checkSnakeCollision(snake){
     const snakeHeadCoords = getGridCoords(snake.head);
     const snakeTailCoords = getGridCoords(snake.tail);
     const snakeBodyCoords = getGridCoords(snake.body);
+    return snakeBodyCoords.includes(snakeHeadCoords) || snakeHeadCoords === snakeTailCoords;
 
 }
