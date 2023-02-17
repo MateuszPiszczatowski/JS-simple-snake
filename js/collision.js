@@ -50,3 +50,4 @@ function checkSnakeCollision(snake){
     return snakeBodyCoords.includes(snakeHeadCoords) || snakeHeadCoords === snakeTailCoords;
 
 }
+export { FOOD_COUNTER, checkIfFoodCollision, handleFoodCollision, checkIfWallCollision, checkSnakeCollision, handleWallAndSnakeCollision }
