@@ -3,14 +3,19 @@ import { getGridCoords } from "./snake.js";
 import { initGame } from "./game-engine.js";
 
 
-function checkIfFoodCollision(snake, apple) {
+function checkIfFoodCollision(snake, food = ["apple", "orange", "pear", "cherries"]) {
     const snakeHeadCoords = getGridCoords(snake.head);
-    const appleCoords = getGridCoords(apple);
-    return snakeHeadCoords === appleCoords;
+    const foodCoords = getGridCoords(food);
+    return snakeHeadCoords === foodCoords;
 };
 
-function handleFoodCollision() {
-    /* elongate snake */
+function handleFoodCollision(snake, food, grid) {
+    const direction = snake.head.dataset.direction;
+    const foodCoords = getGridCoords(food);
+    const newSnakeHeadCoords = changeCoordsByDirection(foodCoords, direction);
+    const newSnakeHead = buildSnakePart("snake-head", direction, newSnakeHeadCoords, grid);
+    const newBodyPart = buildSnakePart("snake-body", direction, foodCoords, grid);
+    return snake;
 };
 
 function checkIfWallCollision(grid){
@@ -32,5 +37,5 @@ function checkSnakeCollision(snake){
     const snakeHeadCoords = getGridCoords(snake.head);
     const snakeTailCoords = getGridCoords(snake.tail);
     const snakeBodyCoords = getGridCoords(snake.body);
-    
+
 }
