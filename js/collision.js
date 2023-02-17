@@ -1,12 +1,18 @@
 "use strict";
-import { getGridCoords } from "./snake.js";
-import { initGame } from "./game-engine.js";
+import { getGridCoords, changeCoordsByDirection, buildSnakePart } from "./snake.js";
+import { getScore, initGame } from "./game-engine.js";
 
+let FOOD_COUNTER = 0;
 
 function checkIfFoodCollision(snake, food = ["apple", "orange", "pear", "cherries"]) {
     const snakeHeadCoords = getGridCoords(snake.head);
     const foodCoords = getGridCoords(food);
-    return snakeHeadCoords === foodCoords;
+    if (snakeHeadCoords === foodCoords) {
+        return FOOD_COUNTER = FOOD_COUNTER + 1;
+    }
+    else {
+        return 0;
+    }
 };
 
 function handleFoodCollision(snake, food, grid) {
@@ -18,7 +24,7 @@ function handleFoodCollision(snake, food, grid) {
     return snake;
 };
 
-function checkIfWallCollision(grid){
+function checkIfWallCollision(snake, grid){
     const snakeHeadCoords = getGridCoords(snake.head);
     const width = grid.offsetWidth;
     const height = grid.offsetHeight;
@@ -27,9 +33,13 @@ function checkIfWallCollision(grid){
 };
 
 function handleWallCollision(){
-    if (confirm("Game over, you looooooser!")) {initGame()}
+    const score = getScore();
+    if (confirm("Game over, you looooooser!")) {
+        alert("You've scored: " + score + ". Do better this time.")
+        initGame();
+    }
     else {
-        /* displayScore() */
+        alert("You've scored: " + score + ".");
     };
 };
 
