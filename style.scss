@@ -15,6 +15,8 @@ body {
   align-items: center;
   padding: 1vh 0 1vh 0;
   box-sizing: border-box;
+  background-image: url("../images/grass.jpg");
+  background-repeat: repeat-x;
 }
 .header {
   border-bottom: dashed darkgreen 0.5vh;

@@ -41,4 +41,8 @@ const initGame = () => {
   }, 3000);
 };
 
-export { initGame };
+const getScore = () =>{
+  return FOOD_COUNTER * 10;
+};
+
+export { initGame, getScore };
