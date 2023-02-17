@@ -27,6 +27,8 @@ body {
   height: fit-content;
   text-transform: uppercase;
 }
+
+
 .main {
   height: 80vh;
   width: 80vh;
@@ -89,6 +91,10 @@ body {
   }
 }
 
+.welcome-snake {
+  height: 100px;
+}
+
 @mixin snake {
   width: 100%;
   height: 100%;
@@ -118,6 +124,9 @@ body {
     @include snake-eye;
     right: 25%;
   }
+}
+.welcome-snake {
+	max-width: 50%;
 }
 
 .snake-body {
