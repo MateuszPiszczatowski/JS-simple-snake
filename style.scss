@@ -6,6 +6,7 @@ body {
   justify-content: space-between;
   height: 100vh;
   background-color: lightgreen;
+  font-family: "Courier New", monospace;
 }
 .header,
 .footer {
@@ -29,7 +30,6 @@ body {
   height: fit-content;
   text-transform: uppercase;
 }
-
 
 .main {
   height: 80vh;
@@ -128,7 +128,7 @@ body {
   }
 }
 .welcome-snake {
-	max-width: 50%;
+  max-width: 50%;
 }
 
 .snake-body {
