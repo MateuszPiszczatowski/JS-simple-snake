@@ -1,6 +1,7 @@
 "use strict";
-import { initSnake, moveSnake } from "./snake.js";
+import { getGridStartCoords, initSnake, moveSnake } from "./snake.js";
 import { prepareGameBoard } from "./gameboard.js";
+import {checkIfFoodCollision, checkIfWallCollision, handleFoodCollision, handleWallAndSnakeCollision} from "./collision.js";
 
 const KEY_CONF = {
   w: "up",
@@ -22,7 +23,14 @@ const gameEngine = (grid, snake) => {
   };
   const body = document.querySelector("body");
   body.addEventListener("keydown", keyPressedEvent);
-  const interval = setInterval(moveSnake, 300, snake, grid);
+  // const interval = setInterval(moveSnake, 300, snake, grid);
+  let elongate = false;
+  const interval = setInterval( () => {
+    moveSnake(snake, grid, elongate);
+    console.log(getGridStartCoords(snake.head));
+    if(checkIfWallCollision(getGridStartCoords(snake.head))){ endGame() };
+    if(checkIfFoodCollision(snake, food)){elongate = true; handleFoodCollision(food);}
+    }, 300);
   function endGame() {
     grid.innerHTML = "";
     grid.style.display = "none";

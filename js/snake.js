@@ -44,6 +44,10 @@ const getGridCoords = (element) => {
   return [Number(element.style.gridRowEnd), Number(element.style.gridColumnEnd)];
 };
 
+const getGridStartCoords = (element) => {
+  return [Number(element.style.gridRowStart), Number(element.style.gridColumnStart)];
+}; 
+
 const changeCoordsByDirection = (coordsXY, direction) => {
   return [
     coordsXY[0] + MOVE_MODIFIERS_XY[direction][1],
@@ -73,4 +77,4 @@ const moveSnake = (snake, grid, enlongate = false) => {
   }
 };
 
-export { initSnake, moveSnake };
+export { initSnake, moveSnake, buildSnakePart, getGridCoords, getGridStartCoords };

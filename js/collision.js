@@ -1,5 +1,5 @@
 "use strict";
-import { getGridCoords, changeCoordsByDirection, buildSnakePart } from "./snake.js";
+import { getGridCoords } from "./snake.js";
 import { getScore, initGame } from "./game-engine.js";
 
 let FOOD_COUNTER = 0;
@@ -15,21 +15,17 @@ function checkIfFoodCollision(snake, food = ["apple", "orange", "pear", "cherrie
     }
 };
 
-function handleFoodCollision(snake, food, grid) {
-    const direction = snake.head.dataset.direction;
+function handleFoodCollision(food) {
     const foodCoords = getGridCoords(food);
-    const newSnakeHeadCoords = changeCoordsByDirection(foodCoords, direction);
-    const newSnakeHead = buildSnakePart("snake-head", direction, newSnakeHeadCoords, grid);
-    const newBodyPart = buildSnakePart("snake-body", direction, foodCoords, grid);
-    return snake;
+    // stare koordynaty jedzenia zastapic nowymi, pustymi
+    return ;
 };
 
-function checkIfWallCollision(snake, grid){
-    const snakeHeadCoords = getGridCoords(snake.head);
-    const width = grid.offsetWidth;
-    const height = grid.offsetHeight;
-    return snakeHeadCoords[0] >= width || snakeHeadCoords[0] <= width
-        || snakeHeadCoords[1] >= height || snakeHeadCoords[1] <= height;
+function checkIfWallCollision(coordsXY){
+    const width = 20;
+    const height = 20;
+    return coordsXY[0] > width || coordsXY[0] <= 1
+        || coordsXY[1] > height || coordsXY[1] <= 1;
 };
 
 function handleWallAndSnakeCollision(){
