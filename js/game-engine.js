@@ -2,6 +2,7 @@
 import { getGridStartCoords, initSnake, moveSnake } from "./snake.js";
 import { prepareGameBoard } from "./gameboard.js";
 import {checkIfFoodCollision, checkIfWallCollision, handleFoodCollision, handleWallAndSnakeCollision} from "./collision.js";
+import { showEndScreen } from "./end-screen.js";
 import { initApple } from "./fruits.js"
 
 const KEY_CONF = {
@@ -33,6 +34,7 @@ const gameEngine = (grid, snake) => {
     grid.style.display = "none";
     document.querySelector(".main").classList.remove("main--game");
     body.removeEventListener("keydown", keyPressedEvent);
+    showEndScreen();
     clearInterval(interval);
   }
   snake.head.addEventListener("click", endGame);
@@ -49,5 +51,6 @@ const initGame = () => {
 const getScore = () => {
   return FOOD_COUNTER * 10;
 };
+
 
 export { initGame, getScore };
