@@ -1,6 +1,7 @@
 "use strict";
 import { getGridCoords } from "./snake.js";
 import { getScore, initGame } from "./game-engine.js";
+import { initApple, getRandomCoords, checkIfFullCell } from "./fruits.js"
 
 let FOOD_COUNTER = 0;
 
@@ -15,9 +16,13 @@ function checkIfFoodCollision(snake, food = ["apple", "orange", "pear", "cherrie
     }
 };
 
-function handleFoodCollision(food) {
-    const foodCoords = getGridCoords(food);
-    // stare koordynaty jedzenia zastapic nowymi, pustymi
+function handleFoodCollision(snake) {
+    let food = document.getElementsByClassName("apple");
+    food.remove();
+    let newCoordsXY = getRandomCoords();
+    while(checkIfFullCell(snake, newCoordsXY)) { 
+        newCoordsXY = getRandomCoords(); }
+    initApple(newCoordsXY);
     return ;
 };
 

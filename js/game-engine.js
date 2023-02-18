@@ -2,6 +2,7 @@
 import { getGridStartCoords, initSnake, moveSnake } from "./snake.js";
 import { prepareGameBoard } from "./gameboard.js";
 import {checkIfFoodCollision, checkIfWallCollision, handleFoodCollision, handleWallAndSnakeCollision} from "./collision.js";
+import { initApple } from "./fruits.js"
 
 const KEY_CONF = {
   w: "up",
@@ -21,11 +22,11 @@ const gameEngine = (grid, snake) => {
   body.addEventListener("keydown", keyPressedEvent);
   // const interval = setInterval(moveSnake, 300, snake, grid);
   let elongate = false;
-  const interval = setInterval( () => {
+  const interval = setInterval( () => { let food = initApple([7, 9]);
     moveSnake(snake, grid, elongate);
     console.log(getGridStartCoords(snake.head));
     if(checkIfWallCollision(getGridStartCoords(snake.head))){ endGame() };
-    if(checkIfFoodCollision(snake, food)){elongate = true; handleFoodCollision(food);}
+    if(checkIfFoodCollision(snake, food)){elongate = true; handleFoodCollision(snake); moveSnake(snake, grid, elongate);}
     }, 300);
   function endGame() {
     grid.innerHTML = "";

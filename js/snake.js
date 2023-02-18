@@ -77,4 +77,4 @@ const moveSnake = (snake, grid, enlongate = false) => {
   }
 };
 
-export { initSnake, moveSnake, buildSnakePart, getGridCoords, getGridStartCoords };
+export { initSnake, moveSnake, buildSnakePart, getGridCoords, getGridStartCoords, setGridStyle };
