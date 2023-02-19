@@ -3,6 +3,27 @@
 const MOVE_MODIFIERS_XY = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
 const DIRECTION_TRANSFORMS = { up: 0, right: 90, down: 180, left: 270 };
 
+export const isSnakeHere = (snake, coordsXY, omittHead = false) => {
+  const coordsLists = { x: [], y: [] };
+  let coords = getGridCoords(snake.head);
+  if (!omittHead) {
+    coordsLists.x.push(coords[0]);
+    coordsLists.y.push(coords[1]);
+  }
+  coords = getGridCoords(snake.tail);
+  coordsLists.x.push(coords[0]);
+  coordsLists.y.push(coords[1]);
+  snake.body.forEach((part) => {
+    coords = getGridCoords(part);
+    coordsLists.x.push(coords[0]);
+    coordsLists.y.push(coords[1]);
+  });
+  for (let i = 0; i < coordsLists.x.length; i++) {
+    if (coordsLists.x[i] === coordsXY[0] && coordsLists.y[i] === coordsXY[1]) return true;
+  }
+  return false;
+};
+
 const setGridStyle = (element, row, column) => {
   element.style.gridRowStart = row - 1;
   element.style.gridRowEnd = row;
@@ -46,7 +67,7 @@ const getGridCoords = (element) => {
 
 const getGridStartCoords = (element) => {
   return [Number(element.style.gridRowStart), Number(element.style.gridColumnStart)];
-}; 
+};
 
 const changeCoordsByDirection = (coordsXY, direction) => {
   return [
@@ -71,7 +92,9 @@ const moveSnake = (snake, grid, enlongate = false) => {
     oldDirection = moveSnakePart(bodyPart, oldDirection);
   });
   if (enlongate) {
-    snake.body.push(buildSnakePart("snake-body", oldDirection, lastBodyPartCoords, grid));
+    const newPart = buildSnakePart("snake-body", oldDirection, lastBodyPartCoords.reverse(), grid);
+    snake.body.push(newPart);
+    newPart.style.transform = `rotate(${DIRECTION_TRANSFORMS[newPart.dataset.direction]}deg)`;
   } else {
     moveSnakePart(snake.tail, oldDirection);
   }

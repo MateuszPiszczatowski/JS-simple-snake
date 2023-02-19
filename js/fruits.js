@@ -2,25 +2,29 @@
 
 import { setGridStyle } from "./snake.js";
 
-function getRandomCoords(){
-    return [Math.floor(Math.random() * 20) + 1, Math.floor(Math.random() * 20) + 1]
+function getRandomCoords() {
+  return [Math.floor(Math.random() * 17) + 3, Math.floor(Math.random() * 17) + 3];
 }
 
-function checkIfFullCell(snake, coordsXY){
-    const snakeHeadCoords = getGridCoords(snake.head);
-    const snakeTailCoords = getGridCoords(snake.tail);
-    const snakeBodyCoords = getGridCoords(snake.body);
-    return snakeBodyCoords.includes(coordsXY) 
-    || coordsXY === snakeHeadCoords
-    || coordsXY === snakeTailCoords;
+function checkIfFullCell(snake, coordsXY) {
+  const snakeHeadCoords = getGridCoords(snake.head);
+  const snakeTailCoords = getGridCoords(snake.tail);
+  const snakeBodyCoords = getGridCoords(snake.body);
+  return (
+    snakeBodyCoords.includes(coordsXY) ||
+    coordsXY === snakeHeadCoords ||
+    coordsXY === snakeTailCoords
+  );
 }
 
 const initApple = (coordsXY) => {
-    const apple = document.createElement("div");
-    apple.classList.add("apple");
-    setGridStyle(apple, coordsXY[0], coordsXY[1]);
-    return apple;
-  };
+  const apple = document.createElement("div");
+  apple.classList.add("apple");
+  setGridStyle(apple, coordsXY[0], coordsXY[1]);
+  document.querySelector(".main__grid").appendChild(apple);
+  return apple;
+};
+
 /*
 function randomApple(squares){
     let coordX = Math.floor(Math.random() * 20) + 1;
@@ -53,4 +57,4 @@ const initCherries = () => {
 };
 */
 
-export { initApple, checkIfFullCell, getRandomCoords }
+export { initApple, checkIfFullCell, getRandomCoords };

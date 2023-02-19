@@ -1,9 +1,17 @@
 "use strict";
 import { getGridStartCoords, initSnake, moveSnake } from "./snake.js";
 import { prepareGameBoard } from "./gameboard.js";
-import {checkIfFoodCollision, checkIfWallCollision, handleFoodCollision, handleWallAndSnakeCollision} from "./collision.js";
+import {
+  checkIfFoodCollision,
+  checkSnakeCollision,
+  checkIfWallCollision,
+  handleFoodCollision,
+  handleWallAndSnakeCollision,
+  resetCounter,
+  FOOD_COUNTER,
+} from "./collision.js";
 import { showEndScreen } from "./end-screen.js";
-import { initApple } from "./fruits.js"
+import { initApple } from "./fruits.js";
 
 const KEY_CONF = {
   w: "up",
@@ -22,20 +30,34 @@ const gameEngine = (grid, snake) => {
   const body = document.querySelector("body");
   body.addEventListener("keydown", keyPressedEvent);
   // const interval = setInterval(moveSnake, 300, snake, grid);
-  let elongate = false;
-  const interval = setInterval( () => { let food = initApple([7, 9]);
-    moveSnake(snake, grid, elongate);
-    console.log(getGridStartCoords(snake.head));
-    if(checkIfWallCollision(getGridStartCoords(snake.head))){ endGame() };
-    if(checkIfFoodCollision(snake, food)){elongate = true; handleFoodCollision(snake); moveSnake(snake, grid, elongate);}
-    }, 300);
+  let food = initApple([7, 9]);
+  let enlongate = false;
+  const interval = setInterval(() => {
+    moveSnake(snake, grid, enlongate);
+    enlongate = enlongate = false;
+    if (checkIfWallCollision(getGridStartCoords(snake.head))) {
+      endGame();
+    }
+    const foodColision = checkIfFoodCollision(snake, food);
+    if (foodColision) {
+      console.log(foodColision);
+      enlongate = true;
+      handleFoodCollision(snake);
+    }
+
+    const snakeCollision = checkSnakeCollision(snake);
+    if (snakeCollision) {
+      endGame();
+    }
+  }, 300);
   function endGame() {
     grid.innerHTML = "";
     grid.style.display = "none";
     document.querySelector(".main").classList.remove("main--game");
     body.removeEventListener("keydown", keyPressedEvent);
-    showEndScreen();
+    showEndScreen(FOOD_COUNTER);
     clearInterval(interval);
+    resetCounter();
   }
   snake.head.addEventListener("click", endGame);
 };
@@ -51,6 +73,5 @@ const initGame = () => {
 const getScore = () => {
   return FOOD_COUNTER * 10;
 };
-
 
 export { initGame, getScore };
