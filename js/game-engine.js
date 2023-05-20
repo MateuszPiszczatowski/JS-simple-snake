@@ -18,6 +18,10 @@ const KEY_CONF = {
   s: "down",
   a: "left",
   d: "right",
+  arrowup: "up",
+  arrowdown: "down",
+  arrowleft: "left",
+  arrowright: "right",
 };
 
 const gameEngine = (grid, snake) => {
